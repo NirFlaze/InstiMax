@@ -1,0 +1,52 @@
+.profile-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+
+.profile-header {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 70px;
+}
+
+.user-info h2 {
+    margin: 0;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 40px;
+    margin: 20px 0;
+}
+
+.profile-stats div {
+    text-align: center;
+}
+
+.buttons a {
+    background: #0d6efd;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: .2s;
+}
+
+.buttons a:hover {
+    background: #0b5ed7;
+    text-decoration: none;
+}

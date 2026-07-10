@@ -1,7 +1,19 @@
-<h2>Профиль</h2>
+<div class="home-container">
 
-<p>Добро пожаловать, <%= current_user.username %>!</p>
+    <h1>InstiMax</h1>
 
-<div class="actions">
-  <%= link_to "Выйти", destroy_user_session_path, data: { turbo_method: :delete } %>
+    <p>Российская социальная сеть</p>
+
+    <div class="home-buttons">
+
+        <% if user_signed_in? %>
+            <%= link_to "Мой профиль", profile_path %>
+        <% else %>
+            <%= link_to "Войти", new_user_session_path %>
+
+            <%= link_to "Регистрация", new_user_registration_path %>
+        <% end %>
+
+    </div>
+
 </div>
