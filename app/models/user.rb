@@ -17,4 +17,6 @@ class User < ApplicationRecord
            class_name: "Follow",
            foreign_key: "following_id",
            dependent: :destroy
+
+  validates :username, presence: true, uniqueness: true
 end
