@@ -1,0 +1,57 @@
+<div class="profile-container">
+
+    <div class="profile-header">
+
+        <div class="avatar">
+            👤
+        </div>
+
+        <div class="user-info">
+            <h2><%= @user.username %></h2>
+
+            <p><%= @user.email %></p>
+
+            <div class="profile-stats">
+
+                <div>
+                    <strong><%= @user.posts.count %></strong><br>
+                    Постов
+                </div>
+
+                <div>
+                    <strong><%= @user.followers.count %></strong><br>
+                    Подписчиков
+                </div>
+
+                <div>
+                    <strong><%= @user.following.count %></strong><br>
+                    Подписок
+                </div>
+
+            </div>
+
+            <% unless current_user == @user %>
+
+                <% if current_user.following?(@user) %>
+
+                    <%= button_to "Отписаться",
+                                follow_path(following_id: @user.id),
+                                method: :delete,
+                                class: "unfollow-button" %>
+
+                <% else %>
+
+                    <%= button_to "Подписаться",
+                                follow_path(following_id: @user.id),
+                                method: :post,
+                                class: "follow-button" %>
+
+                <% end %>
+
+            <% end %>
+
+        </div>
+
+    </div>
+
+</div>

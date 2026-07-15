@@ -18,5 +18,38 @@ class User < ApplicationRecord
            foreign_key: "following_id",
            dependent: :destroy
 
+  has_many :following,
+         through: :following_relationships,
+         source: :following
+
+  has_many :followers,
+         through: :followers_relationships,
+         source: :follower
+
+  def follow(user)
+    following << user unless self == user || following.include?(user)
+  end
+
+  def unfollow(user)
+    following.destroy(user)
+  end
+
+  def following?(user)
+    following.include?(user)
+  end
+
+  private
+
+  def cannot_follow_yourself
+    if follower_id == following_id
+      errors.add(:following_id, "Нельзя подписаться на самого себя")
+    end
+  end
+
   validates :username, presence: true, uniqueness: true
+  validates :follower_id,
+          uniqueness: {
+            scope: :following_id
+          }
+  validate :cannot_follow_yourself
 end
