@@ -1,0 +1,12 @@
+<h1>Лента публикаций</h1>
+
+<% if @posts.any? %>
+  <% @posts.each do |post| %>
+    <div>
+      <p><%= post.caption %></p>
+      <hr>
+    </div>
+  <% end %>
+<% else %>
+  <p>Пока нет ни одной публикации.</p>
+<% end %>

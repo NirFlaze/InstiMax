@@ -1,0 +1,14 @@
+<h1>Новая публикация</h1>
+
+<%= form_with model: @post do |form| %>
+
+  <div>
+    <%= form.label :caption, "Описание" %><br>
+    <%= form.text_area :caption %>
+  </div>
+
+  <br>
+
+  <%= form.submit "Опубликовать" %>
+
+<% end %>
