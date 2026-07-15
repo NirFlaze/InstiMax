@@ -1,0 +1,15 @@
+<div class="users-show">
+    <h2>Пользователи</h2>
+
+    <% @users.each do |user| %>
+
+        <div class="user-card">
+
+            <h3><%= user.username %></h3>
+
+            <%= link_to "Открыть профиль", user_path(user) %>
+
+        </div>
+
+    <% end %>
+</div>
