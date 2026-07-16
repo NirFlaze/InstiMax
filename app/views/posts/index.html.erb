@@ -4,6 +4,11 @@
   <% @posts.each do |post| %>
     <div>
       <p><%= post.caption %></p>
+
+      <% if user_signed_in? && current_user == post.user %>
+        <%= link_to "Редактировать", edit_post_path(post) %>
+      <% end %>
+
       <hr>
     </div>
   <% end %>
