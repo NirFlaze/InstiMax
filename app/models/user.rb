@@ -38,18 +38,5 @@ class User < ApplicationRecord
     following.include?(user)
   end
 
-  private
-
-  def cannot_follow_yourself
-    if follower_id == following_id
-      errors.add(:following_id, "Нельзя подписаться на самого себя")
-    end
-  end
-
   validates :username, presence: true, uniqueness: true
-  validates :follower_id,
-          uniqueness: {
-            scope: :following_id
-          }
-  validate :cannot_follow_yourself
 end

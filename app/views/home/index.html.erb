@@ -1,5 +1,56 @@
 <div class="home-container">
 
+    <div class="search-box">
+
+        <%= form_with url: root_path, method: :get, data: { controller: "search" } do |f| %>
+
+            <%= f.text_field :query,
+                value: @query,
+                placeholder: "Поиск",
+                autocomplete: "off",
+                data: {
+                action: "input->search#submit",
+                search_target: "input"
+                } %>
+
+        <% end %>
+
+    </div>
+
+    <div class="search-results">
+
+        <% if @query.present? %>
+
+            <% if @users.any? %>
+
+                <% @users.each do |user| %>
+
+                    <div class="search-user">
+
+                        <span style="font-size:28px; margin-right:14px;">
+                            👤
+                        </span>
+
+                        <%= link_to user.username, user_path(user) %>
+
+                    </div>
+
+                <% end %>
+
+            <% else %>
+
+                <p>Ничего не найдено.</p>
+
+            <% end %>
+
+        <% else %>
+
+            <p>История поиска пока пуста.</p>
+
+        <% end %>
+
+    </div>
+
     <h1>InstiMax</h1>
 
     <p>Российская социальная сеть</p>
