@@ -3,7 +3,10 @@
 <% if @posts.any? %>
   <% @posts.each do |post| %>
     <div>
+      <p><strong><%= post.user.username %></strong></p>
       <p><%= post.caption %></p>
+
+      <p>❤️ <%= post.likes.count %> лайков</p>
 
       <% if user_signed_in? && current_user == post.user %>
         <%= link_to "Редактировать", edit_post_path(post) %>
