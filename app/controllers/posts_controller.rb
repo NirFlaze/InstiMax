@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [ :index ]
 
   def index
     if user_signed_in?
-      @posts = Post.where(user_id: current_user.following.ids + [current_user.id])
+      @posts = Post.where(user_id: current_user.following.ids + [ current_user.id ])
                   .order(created_at: :desc)
     else
       @posts = Post.order(created_at: :desc)
@@ -38,9 +38,16 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post = current_user.posts.find(params[:id])
+    @post.destroy
+
+    redirect_to posts_path, notice: "Публикация успешно удалена!"
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:caption)
+    params.require(:post).permit(:caption, :image)
   end
 end
