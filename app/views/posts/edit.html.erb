@@ -1,0 +1,16 @@
+<h1>Редактирование публикации</h1>
+
+<%= form_with model: @post do |form| %>
+
+  <div>
+    <%= form.label :caption, "Описание" %><br>
+    <%= form.text_area :caption %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= form.submit "Сохранить изменения" %>
+  </div>
+
+<% end %>
