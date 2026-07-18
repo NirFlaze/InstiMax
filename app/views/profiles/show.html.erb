@@ -3,13 +3,25 @@
   <div class="profile-header">
 
     <div class="avatar">
-      👤
+
+      <% if @user.avatar.attached? %>
+
+        <%= image_tag @user.avatar, class: "profile-avatar" %>
+
+      <% else %>
+        👤
+      <% end %>
+
     </div>
 
     <div class="user-info">
       <h2><%= @user.username %></h2>
 
-      <p><%= @user.email %></p>
+      <% if @user.gender.present? %>
+
+        <p><%= @user.gender == "male" ? "Мужской" : "Женский" %></p>
+
+      <% end %>
 
       <div class="profile-stats">
 
@@ -30,7 +42,17 @@
 
       </div>
 
+      <% if @user.bio.present? %>
+
+        <div class="bio">
+          <p><%= @user.bio %></p>
+        </div>
+
+      <% end %>
+
       <div class="buttons">
+        <%= link_to "Редактировать профиль", edit_profile_path %>
+
         <%= link_to "Выйти", destroy_user_session_path, data: { turbo_method: :delete } %>
       </div>
 

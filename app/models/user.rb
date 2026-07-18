@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one_attached :avatar
+
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -39,4 +41,11 @@ class User < ApplicationRecord
   end
 
   validates :username, presence: true, uniqueness: true
+  validates :bio, length: { maximum: 300 }
+
+  validates :gender,
+            inclusion: {
+              in: %w[male female],
+              allow_blank: true
+            }
 end

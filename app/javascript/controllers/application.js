@@ -1,4 +1,5 @@
 import { Application } from "@hotwired/stimulus"
+import "./bio_counter"
 
 const application = Application.start()
 
