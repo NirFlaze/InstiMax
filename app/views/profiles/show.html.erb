@@ -53,6 +53,8 @@
       <div class="buttons">
         <%= link_to "Редактировать профиль", edit_profile_path %>
 
+        <%= link_to "Создать пост", new_post_path %>
+
         <%= link_to "Выйти", destroy_user_session_path, data: { turbo_method: :delete } %>
       </div>
 

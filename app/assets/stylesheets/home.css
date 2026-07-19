@@ -90,3 +90,11 @@
     font-weight: 600;
     text-decoration: none;
 }
+
+.search-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle;
+}

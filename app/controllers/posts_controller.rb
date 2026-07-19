@@ -18,7 +18,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
 
     if @post.save
-      redirect_to posts_path, notice: "Публикация успешно создана!"
+      redirect_to profile_path, notice: "Публикация успешно создана!"
     else
       render :new, status: :unprocessable_entity
     end
