@@ -146,3 +146,52 @@
     line-height: 1.6;
     white-space: pre-wrap;
 }
+
+.profile-divider {
+    margin: 40px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.profile-posts h3 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.post-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,.08);
+    transition: .2s;
+}
+
+.post-card:hover {
+    transform: translateY(-4px);
+}
+
+.post-image {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    display: block;
+}
+
+.post-caption {
+    padding: 15px;
+    text-align: center;
+    color: #444;
+}
+
+.no-posts {
+    text-align: center;
+    color: #888;
+    padding: 50px;
+}

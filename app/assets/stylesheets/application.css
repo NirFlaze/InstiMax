@@ -9,10 +9,10 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-@import "home.css";
-@import "devise.css";
-@import "profile.css";
-@import "edit_profile.css";
+@import url("home.css");
+@import url("devise.css");
+@import url("profile.css");
+@import url("edit_profile.css");
 
 * {
     margin: 0;

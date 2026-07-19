@@ -42,14 +42,19 @@
 
         </div>
 
-        <div class="field">
+        <div data-controller="bio-counter", class="field">
 
             <%= f.label :bio, "Биография" %>
 
-            <%= f.text_area :bio, rows: 5, maxlength: 300, id: "bio-field"%>
+            <%= f.text_area :bio, rows: 5, maxlength: 300, id: "bio-field",
+                data: {
+                    bio_counter_target: "bio", 
+                    action: "input->bio-counter#update"
+                }
+            %>
 
             <p class="bio-counter">
-                <span id="bio-count"><%= @user.bio&.length || 0 %></span>/300 
+                <span data-bio-counter-target="counter">0</span>/300
             </p>
 
         </div>
