@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :posts do
-    resources :comments, only: [:create, :destroy]
-    resource :like, only: [:create, :destroy]
+    resources :comments, only: [ :create, :destroy ]
+    resource :like, only: [ :create, :destroy ]
   end
 
   resource :profile, only: [ :show ]
