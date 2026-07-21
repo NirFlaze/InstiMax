@@ -51,6 +51,36 @@
 
     </div>
 
+    <h2>Лента подписок</h2>
+
+<% if @posts.any? %>
+
+  <% @posts.each do |post| %>
+
+    <div>
+
+      <p><strong><%= post.user.username %></strong></p>
+
+      <% if post.image.attached? %>
+        <%= image_tag post.image, width: 300 %>
+      <% end %>
+
+      <p><%= post.caption %></p>
+
+      <p>❤️ <%= post.likes.count %> лайков</p>
+
+      <hr>
+
+    </div>
+
+  <% end %>
+
+<% else %>
+
+  <p>Вы пока ни на кого не подписаны или в вашей ленте нет публикаций.</p>
+
+<% end %>
+
     <h1>InstiMax</h1>
 
     <p>Российская социальная сеть</p>
@@ -59,6 +89,8 @@
 
         <% if user_signed_in? %>
             <%= link_to "Мой профиль", profile_path %>
+
+            <%= link_to "Все публикации", explore_path %>
         <% else %>
             <%= link_to "Войти", new_user_session_path %>
 
