@@ -4,19 +4,22 @@ class LikesController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
 
-    unless @post.likes.exists?(user: current_user)
-      @post.likes.create(user: current_user)
-    end
+    @post.likes.create(user: current_user)
 
-    redirect_to posts_path
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_back fallback_location: posts_path }
+    end
   end
 
   def destroy
     @post = Post.find(params[:post_id])
 
-    like = @post.likes.find_by(user: current_user)
-    like.destroy if like
+    @post.likes.find_by(user: current_user)&.destroy
 
-    redirect_to posts_path
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_back fallback_location: posts_path }
+    end
   end
 end

@@ -1,3 +1,4 @@
+<%= turbo_frame_tag "post_#{post.id}" do %>
 <div style="
   border:1px solid #ddd;
   border-radius:14px;
@@ -35,6 +36,7 @@
 
         <%= button_to post_like_path(post),
               method: :delete,
+              form: { data: { turbo_frame: dom_id(post) } },
               style: "border:none;background:none;padding:0;cursor:pointer;" do %>
 
           <span style="font-size:28px;color:#e53935;">
@@ -47,6 +49,7 @@
 
         <%= button_to post_like_path(post),
               method: :post,
+              form: { data: { turbo_frame: dom_id(post) } },
               style: "border:none;background:none;padding:0;cursor:pointer;" do %>
 
           <span style="font-size:28px;color:#777;">
@@ -76,9 +79,9 @@
   </div>
 
 
-  <details>
+  <details style="text-align:left;">
 
-    <summary style="cursor:pointer;font-weight:bold;">
+    <summary style="cursor:pointer;font-weight:bold;text-align:left;">
 
       Показать комментарии
 
@@ -128,7 +131,7 @@
     <% if user_signed_in? %>
 
       <%= form_with model: [post, Comment.new],
-            style:"display:flex;gap:10px;margin-top:10px;" do |f| %>
+            style:"display:flex;gap:10px;margin-top:10px;text-align:left;" do |f| %>
 
         <%= f.text_field :content,
               placeholder:"Напишите комментарий...",
@@ -156,8 +159,8 @@
     <div style="margin-top:18px;">
 
       <%= link_to "✏️ Редактировать",
-            edit_post_path(post) %>
-
+            edit_post_path(post),
+            data: { turbo: false } %>
       |
 
       <%= link_to "🗑 Удалить",
@@ -172,3 +175,4 @@
   <% end %>
 
 </div>
+<% end %>
