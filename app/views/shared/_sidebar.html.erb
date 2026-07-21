@@ -1,0 +1,45 @@
+<div class="sidebar">
+
+    <div class="logo">
+        📸
+    </div>
+
+    <nav class="sidebar-menu">
+
+        <%= link_to root_path, class: "sidebar-item" do %>
+            <span class="icon">🏠</span>
+            <span class="text">Главная</span>
+        <% end %>
+
+        <%= link_to root_path, class: "sidebar-item" do %>
+            <span class="icon">🔍</span>
+            <span class="text">Поиск</span>
+        <% end %>
+
+        <%= link_to posts_path, class: "sidebar-item" do %>
+            <span class="icon">📰</span>
+            <span class="text">Посты</span>
+        <% end %>
+
+        <%= link_to new_post_path, class: "sidebar-item" do %>
+            <span class="icon">➕</span>
+            <span class="text">Создать</span>
+        <% end %>
+
+        <%= link_to profile_path, class: "sidebar-item" do %>
+            <span class="icon">👤</span>
+            <span class="text">Профиль</span>
+        <% end %>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <a href="#" class="sidebar-item">
+            <span class="icon">☰</span>
+            <span class="text">Еще</span>
+        </a>
+
+    </div>
+
+</div>

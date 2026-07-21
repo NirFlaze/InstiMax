@@ -13,6 +13,7 @@
 @import url("devise.css");
 @import url("profile.css");
 @import url("edit_profile.css");
+@import url("sidebar.css");
 
 * {
     margin: 0;
@@ -43,4 +44,13 @@ button, input[type="submit"] {
     max-width: 1100px;
     margin: 40px auto;
     padding: 20px;
+}
+
+.page-content {
+    margin-left: 82px;
+    transition: margin-left .3s ease;
+}
+
+.sidebar:hover + .page-content {
+    margin-left: 240px;
 }
