@@ -2,7 +2,9 @@ require "test_helper"
 
 class ExploreControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get explore_index_url
+    sign_in users(:one)
+
+    get explore_path
     assert_response :success
   end
 end
