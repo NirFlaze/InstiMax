@@ -1,34 +1,15 @@
 <h1>Лента публикаций</h1>
 
 <% if @posts.any? %>
+
   <% @posts.each do |post| %>
-    <div>
-      <p><strong><%= post.user.username %></strong></p>
 
-      <% if post.image.attached? %>
-        <%= image_tag post.image, width: 300 %>
-      <% end %>
+    <%= render "post", post: post %>
 
-      <p><%= post.caption %></p>
-
-      <p>❤️ <%= post.likes.count %> лайков</p>
-
-<% if user_signed_in? && current_user == post.user %>
-  <%= link_to "Редактировать", edit_post_path(post) %>
-
-  |
-
-  <%= link_to "Удалить",
-              post_path(post),
-              data: {
-                turbo_method: :delete,
-                turbo_confirm: "Удалить публикацию?"
-              } %>
-<% end %>
-
-      <hr>
-    </div>
   <% end %>
+
 <% else %>
+
   <p>Пока нет ни одной публикации.</p>
+
 <% end %>
