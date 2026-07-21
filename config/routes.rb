@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   resource :profile, only: [ :show ]
   resource :follow, only: [ :create, :destroy ]
+  resource :profile do
+    get :edit
+    patch :update
+  end
 
   resources :users, only: [ :index, :show ]
 

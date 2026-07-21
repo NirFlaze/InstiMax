@@ -28,7 +28,13 @@
                     <div class="search-user">
 
                         <span style="font-size:28px; margin-right:14px;">
-                            👤
+                            <% if user.avatar.attached? %>
+
+                                <%= image_tag user.avatar, class: "search-avatar" %>
+
+                            <% else %>
+                                👤
+                            <% end %>
                         </span>
 
                         <%= link_to user.username, user_path(user) %>
@@ -42,10 +48,6 @@
                 <p>Ничего не найдено.</p>
 
             <% end %>
-
-        <% else %>
-
-            <p>История поиска пока пуста.</p>
 
         <% end %>
 

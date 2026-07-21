@@ -3,13 +3,25 @@
   <div class="profile-header">
 
     <div class="avatar">
-      👤
+
+      <% if @user.avatar.attached? %>
+
+        <%= image_tag @user.avatar, class: "profile-avatar" %>
+
+      <% else %>
+        👤
+      <% end %>
+
     </div>
 
     <div class="user-info">
       <h2><%= @user.username %></h2>
 
-      <p><%= @user.email %></p>
+      <% if @user.gender.present? %>
+
+        <p><%= @user.gender == "male" ? "Мужской" : "Женский" %></p>
+
+      <% end %>
 
       <div class="profile-stats">
 
@@ -30,12 +42,63 @@
 
       </div>
 
+      <% if @user.bio.present? %>
+
+        <div class="bio">
+          <p><%= @user.bio %></p>
+        </div>
+
+      <% end %>
+
       <div class="buttons">
+        <%= link_to "Редактировать профиль", edit_profile_path %>
+
+        <%= link_to "Создать пост", new_post_path %>
+
         <%= link_to "Выйти", destroy_user_session_path, data: { turbo_method: :delete } %>
       </div>
 
     </div>
 
   </div>
+
+</div>
+
+<hr class="profile-divider">
+
+<div class="profile-posts">
+
+    <h3>Публикации</h3>
+
+    <% if @posts.any? %>
+
+        <div class="posts-grid">
+
+            <% @posts.each do |post| %>
+
+                <div class="post-card">
+
+                    <% if post.image.attached? %>
+
+                        <%= image_tag post.image,
+                                      class: "post-image" %>
+
+                    <% end %>
+
+                    <div class="post-caption">
+                        <%= truncate(post.caption, length: 60) %>
+                    </div>
+
+                </div>
+
+            <% end %>
+
+        </div>
+
+    <% else %>
+
+        <p class="no-posts">У вас пока нет публикаций.</p>
+
+    <% end %>
 
 </div>
