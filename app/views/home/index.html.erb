@@ -58,22 +58,8 @@
 <% if @posts.any? %>
 
   <% @posts.each do |post| %>
-
-    <div>
-
-      <p><strong><%= post.user.username %></strong></p>
-
-      <% if post.image.attached? %>
-        <%= image_tag post.image, width: 300 %>
-      <% end %>
-
-      <p><%= post.caption %></p>
-
-      <p>❤️ <%= post.likes.count %> лайков</p>
-
-      <hr>
-
-    </div>
+      
+      <%= render "posts/post", post: post %>
 
   <% end %>
 
