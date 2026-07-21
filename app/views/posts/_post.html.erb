@@ -1,0 +1,174 @@
+<div style="
+  border:1px solid #ddd;
+  border-radius:14px;
+  padding:18px;
+  margin-bottom:25px;
+  background:white;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  max-width:600px;">
+
+  <h3 style="margin-top:0;">
+    <%= post.user.username %>
+  </h3>
+
+  <% if post.image.attached? %>
+    <%= image_tag post.image,
+          width: 550,
+          style: "border-radius:10px;max-width:100%;height:auto;" %>
+  <% end %>
+
+  <p style="font-size:16px;">
+    <%= post.caption %>
+  </p>
+
+
+  <div style="
+    display:flex;
+    align-items:center;
+    gap:25px;
+    margin-top:12px;
+    margin-bottom:12px;">
+
+    <% if user_signed_in? %>
+
+      <% if post.liked_by?(current_user) %>
+
+        <%= button_to post_like_path(post),
+              method: :delete,
+              style: "border:none;background:none;padding:0;cursor:pointer;" do %>
+
+          <span style="font-size:28px;color:#e53935;">
+            ♥
+          </span>
+
+        <% end %>
+
+      <% else %>
+
+        <%= button_to post_like_path(post),
+              method: :post,
+              style: "border:none;background:none;padding:0;cursor:pointer;" do %>
+
+          <span style="font-size:28px;color:#777;">
+            ♡
+          </span>
+
+        <% end %>
+
+      <% end %>
+
+    <% else %>
+
+      <span style="font-size:28px;color:#777;">
+        ♡
+      </span>
+
+    <% end %>
+
+    <span>
+      <%= post.likes.count %>
+    </span>
+
+    <span style="color:#666;">
+      💬 <%= post.comments.count %>
+    </span>
+
+  </div>
+
+
+  <details>
+
+    <summary style="cursor:pointer;font-weight:bold;">
+
+      Показать комментарии
+
+    </summary>
+
+    <br>
+
+    <% if post.comments.any? %>
+
+      <% post.comments.each do |comment| %>
+
+        <div style="
+          background:#f5f5f5;
+          padding:10px;
+          border-radius:8px;
+          margin-bottom:10px;">
+
+          <b><%= comment.user.username %></b>
+
+          <br>
+
+          <%= comment.content %>
+
+          <% if user_signed_in? && comment.user == current_user %>
+
+            <div style="margin-top:8px;">
+
+              <%= button_to "🗑 Удалить",
+                    post_comment_path(post, comment),
+                    method: :delete %>
+
+            </div>
+
+          <% end %>
+
+        </div>
+
+      <% end %>
+
+    <% else %>
+
+      <p>Комментариев пока нет.</p>
+
+    <% end %>
+
+
+    <% if user_signed_in? %>
+
+      <%= form_with model: [post, Comment.new],
+            style:"display:flex;gap:10px;margin-top:10px;" do |f| %>
+
+        <%= f.text_field :content,
+              placeholder:"Напишите комментарий...",
+              style:"flex:1;padding:10px;border-radius:20px;" %>
+
+        <%= f.submit "➤",
+              style:"
+              width:42px;
+              height:42px;
+              border:none;
+              border-radius:50%;
+              background:#0d6efd;
+              color:white;
+              cursor:pointer;" %>
+
+      <% end %>
+
+    <% end %>
+
+  </details>
+
+
+  <% if user_signed_in? && current_user == post.user %>
+
+    <div style="margin-top:18px;">
+
+      <%= link_to "✏️ Редактировать",
+            edit_post_path(post) %>
+
+      |
+
+      <%= link_to "🗑 Удалить",
+            post_path(post),
+            data: {
+              turbo_method: :delete,
+              turbo_confirm: "Удалить публикацию?"
+            } %>
+
+    </div>
+
+  <% end %>
+
+</div>

@@ -1,0 +1,66 @@
+<div class="edit-profile-container">
+
+    <h2>Редактирование профиля</h2>
+
+    <%= form_with model: @user,
+                  url: profile_path,
+                  method: :patch do |f| %>
+
+        <div class="field">
+
+            <%= f.label :avatar, "Фото профиля" %>
+
+            <% if @user.avatar.attached? %>
+
+                <%= image_tag @user.avatar,
+                              class: "avatar-preview" %>
+
+            <% end %>
+
+            <%= f.file_field :avatar %>
+
+        </div>
+
+        <div class="field">
+
+            <%= f.label :username, "Имя пользователя" %>
+
+            <%= f.text_field :username %>
+
+        </div>
+
+        <div class="field">
+
+            <%= f.label :gender, "Пол" %>
+
+            <%= f.select :gender,
+                    [
+                        ["Мужской", "male"],
+                        ["Женский", "female"],
+                        ["Не указывать", ""]
+                    ] %>
+
+        </div>
+
+        <div data-controller="bio-counter", class="field">
+
+            <%= f.label :bio, "Биография" %>
+
+            <%= f.text_area :bio, rows: 5, maxlength: 300, id: "bio-field",
+                data: {
+                    bio_counter_target: "bio", 
+                    action: "input->bio-counter#update"
+                }
+            %>
+
+            <p class="bio-counter">
+                <span data-bio-counter-target="counter">0</span>/300
+            </p>
+
+        </div>
+
+        <%= f.submit "Сохранить изменения" %>
+
+    <% end %>
+
+</div>
