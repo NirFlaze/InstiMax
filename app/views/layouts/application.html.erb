@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
     <title><%= content_for(:title) || "Instimax" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -26,12 +33,10 @@
   <body>
 
     <% if user_signed_in? %>
-      <%= render "shared/sidebar" %>
+      <%= render "layouts/navbar" %>
     <% end %>
 
-    <main class="page-content">
-      <%= yield %>
-    </main>
+    <%= yield %>
     
   </body>
 </html>

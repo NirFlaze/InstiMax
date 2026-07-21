@@ -1,104 +1,136 @@
-<div class="home-container">
+<div class="home-layout">
 
-    <div class="search-box">
+    <aside class="following-sidebar">
 
-        <%= form_with url: root_path, method: :get, data: { controller: "search" } do |f| %>
+        <h3>Подписки</h3>
 
-            <%= f.text_field :query,
-                value: @query,
-                placeholder: "Поиск",
-                autocomplete: "off",
-                data: {
-                action: "input->search#submit",
-                search_target: "input"
-                } %>
+        <% if current_user.following.any? %>
 
-        <% end %>
+            <% current_user.following.each do |user| %>
 
-    </div>
+                <%= link_to user_path(user), class: "following-user" do %>
 
-    <div class="search-results">
+                    <% if user.avatar.attached? %>
 
-        <% if @query.present? %>
+                        <%= image_tag user.avatar, class: "following-avatar" %>
 
-            <% if @users.any? %>
+                    <% else %>
 
-                <% @users.each do |user| %>
+                        <div class="following-avatar-placeholder">
+                            👤
+                        </div>
 
-                    <div class="search-user">
+                    <% end %>
 
-                        <span style="font-size:28px; margin-right:14px;">
-                            <% if user.avatar.attached? %>
-
-                                <%= image_tag user.avatar, class: "search-avatar" %>
-
-                            <% else %>
-                                👤
-                            <% end %>
-                        </span>
-
-                        <%= link_to user.username, user_path(user) %>
-
-                    </div>
+                    <span>
+                        <%= user.username %>
+                    </span>
 
                 <% end %>
 
-            <% else %>
+            <% end %>
 
-                <p>Ничего не найдено.</p>
+        <% else %>
+
+            <p class="following-empty">
+                Пока нет подписок
+            </p>
+
+        <% end %>
+
+    </aside>
+
+    <main class="feed">
+
+        <% if @posts.any? %>
+
+            <% @posts.each do |post| %>
+
+                <div class="feed-post">
+
+                  <div class="post-header">
+
+                      <div class="post-author">
+
+                          <% if post.user.avatar.attached? %>
+
+                              <%= image_tag post.user.avatar, class: "post-avatar" %>
+
+                          <% else %>
+
+                              <div class="post-avatar-placeholder">
+                                  👤
+                              </div>
+
+                          <% end %>
+
+                          <div>
+
+                              <%= link_to post.user.username,
+                                          user_path(post.user),
+                                          class: "post-username" %>
+
+                              <div class="post-date">
+                                  <%= post.created_at.strftime("%d.%m.%Y") %>
+                              </div>
+
+                          </div>
+
+                      </div>
+
+                      <% if post.user == current_user %>
+
+                          <div class="post-actions">
+
+                              <%= link_to "✏️", edit_post_path(post) %>
+
+                              <%= link_to "🗑",
+                                          post_path(post),
+                                          data: {
+                                              turbo_method: :delete,
+                                              turbo_confirm: "Удалить публикацию?"
+                                          } %>
+
+                          </div>
+
+                      <% end %>
+
+                  </div>
+
+                  <% if post.image.attached? %>
+
+                      <%= image_tag post.image, class: "feed-image" %>
+
+                  <% end %>
+
+                  <% if post.caption.present? %>
+
+                      <div class="post-caption">
+                          <%= post.caption %>
+                      </div>
+
+                  <% end %>
+
+                  <div class="post-footer">
+
+                      ❤️ <%= post.likes.count %>
+
+                      <span>
+                          💬 <%= post.comments.count %>
+                      </span>
+
+                  </div>
+
+              </div>
 
             <% end %>
 
-        <% end %>
-
-    </div>
-
-    <h2>Лента подписок</h2>
-
-<% if @posts.any? %>
-
-  <% @posts.each do |post| %>
-
-    <div>
-
-      <p><strong><%= post.user.username %></strong></p>
-
-      <% if post.image.attached? %>
-        <%= image_tag post.image, width: 300 %>
-      <% end %>
-
-      <p><%= post.caption %></p>
-
-      <p>❤️ <%= post.likes.count %> лайков</p>
-
-      <hr>
-
-    </div>
-
-  <% end %>
-
-<% else %>
-
-  <p>Вы пока ни на кого не подписаны или в вашей ленте нет публикаций.</p>
-
-<% end %>
-
-    <h1>InstiMax</h1>
-
-    <p>Российская социальная сеть</p>
-
-    <div class="home-buttons">
-
-        <% if user_signed_in? %>
-            <%= link_to "Мой профиль", profile_path %>
-
-            <%= link_to "Все публикации", explore_path %>
         <% else %>
-            <%= link_to "Войти", new_user_session_path %>
 
-            <%= link_to "Регистрация", new_user_registration_path %>
+            <p>В ленте пока нет публикаций.</p>
+
         <% end %>
 
-    </div>
+    </main>
 
 </div>
