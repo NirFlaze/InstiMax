@@ -1,66 +1,71 @@
 <div class="profile-container">
 
-  <div class="profile-header">
+    <div class="profile-header">
 
-    <div class="avatar">
+        <div class="avatar">
 
-      <% if @user.avatar.attached? %>
+            <% if @user.avatar.attached? %>
 
-        <%= image_tag @user.avatar, class: "profile-avatar" %>
+                <%= image_tag @user.avatar, class: "profile-avatar" %>
 
-      <% else %>
-        👤
-      <% end %>
+            <% else %>
+                👤
+            <% end %>
+
+        </div>
+
+        <div class="user-info">
+
+            <div class="profile-top">
+
+                <h2><%= @user.username %></h2>
+
+                <% if @user.gender.present? %>
+
+                    <span class="profile-gender">
+                        <%= @user.gender == "male" ? "Мужской" : "Женский" %>
+                    </span>
+
+                <% end %>
+
+            </div>
+
+            <div class="profile-stats">
+
+                <div>
+                    <strong><%= @user.posts.count %></strong>
+                    <span>Постов</span>
+                </div>
+
+                <div>
+                    <strong><%= @user.followers.count %></strong>
+                    <span>Подписчиков</span>
+                </div>
+
+                <div>
+                    <strong><%= @user.following.count %></strong>
+                    <span>Подписок</span>
+                </div>
+
+            </div>
+
+            <% if @user.bio.present? %>
+
+                <div class="bio"><%= @user.bio %></div>
+
+            <% end %>
+
+            <div class="buttons">
+
+                <%= link_to "Редактировать профиль", edit_profile_path %>
+
+                <%= link_to "Создать пост", new_post_path %>
+
+            </div>
+
+        </div>
 
     </div>
-
-    <div class="user-info">
-      <h2><%= @user.username %></h2>
-
-      <% if @user.gender.present? %>
-
-        <p><%= @user.gender == "male" ? "Мужской" : "Женский" %></p>
-
-      <% end %>
-
-      <div class="profile-stats">
-
-        <div>
-          <strong><%= @user.posts.count %></strong><br>
-          Постов
-        </div>
-
-        <div>
-          <strong><%= @user.followers.count %></strong><br>
-          Подписчиков
-        </div>
-
-        <div>
-          <strong><%= @user.following.count %></strong><br>
-          Подписок
-        </div>
-
-      </div>
-
-      <% if @user.bio.present? %>
-
-        <div class="bio">
-          <p><%= @user.bio %></p>
-        </div>
-
-      <% end %>
-
-      <div class="buttons">
-        <%= link_to "Редактировать профиль", edit_profile_path %>
-
-        <%= link_to "Создать пост", new_post_path %>
-
-        <%= link_to "Выйти", destroy_user_session_path, data: { turbo_method: :delete } %>
-      </div>
-
-    </div>
-
-  </div>
 
 </div>
 
@@ -72,15 +77,21 @@
 
     <% if @posts.any? %>
 
-        <% @posts.each do |post| %>
+        <div class="profile-posts-grid">
 
-           <%= render "posts/post", post: post %>
+            <% @posts.each do |post| %>
 
-        <% end %>
+                <%= render "posts/post", post: post %>
+
+            <% end %>
+
+        </div>
 
     <% else %>
 
-        <p class="no-posts">У вас пока нет публикаций.</p>
+        <p class="no-posts">
+            У вас пока нет публикаций.
+        </p>
 
     <% end %>
 
