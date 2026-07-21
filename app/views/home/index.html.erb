@@ -48,80 +48,80 @@
 
                 <div class="feed-post">
 
-                  <div class="post-header">
+                    <div class="post-header">
 
-                      <div class="post-author">
+                        <div class="post-author">
 
-                          <% if post.user.avatar.attached? %>
+                            <% if post.user.avatar.attached? %>
 
-                              <%= image_tag post.user.avatar, class: "post-avatar" %>
+                                <%= image_tag post.user.avatar, class: "post-avatar" %>
 
-                          <% else %>
+                            <% else %>
 
-                              <div class="post-avatar-placeholder">
-                                  👤
-                              </div>
+                                <div class="post-avatar-placeholder">
+                                    👤
+                                </div>
 
-                          <% end %>
+                            <% end %>
 
-                          <div>
+                            <div>
 
-                              <%= link_to post.user.username,
-                                          user_path(post.user),
-                                          class: "post-username" %>
+                                <%= link_to post.user.username,
+                                            user_path(post.user),
+                                            class: "post-username" %>
 
-                              <div class="post-date">
-                                  <%= post.created_at.strftime("%d.%m.%Y") %>
-                              </div>
+                                <div class="post-date">
+                                    <%= post.created_at.strftime("%d.%m.%Y") %>
+                                </div>
 
-                          </div>
+                            </div>
 
-                      </div>
+                        </div>
 
-                      <% if post.user == current_user %>
+                        <% if post.user == current_user %>
 
-                          <div class="post-actions">
+                            <div class="post-actions">
 
-                              <%= link_to "✏️", edit_post_path(post) %>
+                                <%= link_to "✏️", edit_post_path(post) %>
 
-                              <%= link_to "🗑",
-                                          post_path(post),
-                                          data: {
-                                              turbo_method: :delete,
-                                              turbo_confirm: "Удалить публикацию?"
-                                          } %>
+                                <%= link_to "🗑",
+                                            post_path(post),
+                                            data: {
+                                                turbo_method: :delete,
+                                                turbo_confirm: "Удалить публикацию?"
+                                            } %>
 
-                          </div>
+                            </div>
 
-                      <% end %>
+                        <% end %>
 
-                  </div>
+                    </div>
 
-                  <% if post.image.attached? %>
+                    <% if post.image.attached? %>
 
-                      <%= image_tag post.image, class: "feed-image" %>
+                        <%= image_tag post.image, class: "feed-image" %>
 
-                  <% end %>
+                    <% end %>
 
-                  <% if post.caption.present? %>
+                    <% if post.caption.present? %>
 
-                      <div class="post-caption">
-                          <%= post.caption %>
-                      </div>
+                        <div class="post-caption">
+                            <%= post.caption %>
+                        </div>
 
-                  <% end %>
+                    <% end %>
 
-                  <div class="post-footer">
+                    <div class="post-footer">
 
-                      ❤️ <%= post.likes.count %>
+                        ❤️ <%= post.likes.count %>
 
-                      <span>
-                          💬 <%= post.comments.count %>
-                      </span>
+                        <span>
+                            💬 <%= post.comments.count %>
+                        </span>
 
-                  </div>
+                    </div>
 
-              </div>
+                </div>
 
             <% end %>
 
