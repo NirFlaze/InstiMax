@@ -48,9 +48,5 @@ button, input[type="submit"] {
 
 .page-content {
     margin-left: 82px;
-    transition: margin-left .3s ease;
-}
-
-.sidebar:hover + .page-content {
-    margin-left: 240px;
+    min-height: 100vh;
 }

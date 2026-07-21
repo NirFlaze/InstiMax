@@ -48,13 +48,15 @@
 }
 
 .text {
-    white-space: nowrap;
     opacity: 0;
-    transition: opacity .2s;
+    transform: translateX(-10px);
+    transition: opacity .2s ease,
+                transform .2s ease;
 }
 
 .sidebar:hover .text {
     opacity: 1;
+    transform: translateX(0);
 }
 
 .sidebar-bottom {
