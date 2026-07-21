@@ -1,0 +1,41 @@
+<div class="search-results">
+    <% if @query.present? %>
+
+        <% if @users.any? %>
+
+            <% @users.each do |user| %>
+
+                <div class="search-user">
+
+                    <% if user.avatar.attached? %>
+
+                        <%= link_to user_path(user), data: { turbo_frame: "_top" } do %>
+                            <%= image_tag user.avatar, class: "search-avatar" %>
+                        <% end %>
+
+                    <% else %>
+
+                        <div class="search-avatar-placeholder">
+                            👤
+                        </div>
+
+                    <% end %>
+
+                    <%= link_to user.username,
+                        user_path(user),
+                        data: { turbo_frame: "_top" } %>
+
+                </div>
+
+            <% end %>
+
+        <% else %>
+
+            <div class="search-empty">
+                Ничего не найдено
+            </div>
+
+        <% end %>
+
+    <% end %>
+</div>

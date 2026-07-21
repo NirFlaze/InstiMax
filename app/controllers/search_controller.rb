@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class SearchController < ApplicationController
   before_action :authenticate_user!
 
   def index
@@ -9,7 +9,5 @@ class HomeController < ApplicationController
     else
       @users = []
     end
-
-    @posts = Post.where(user: current_user.following).order(created_at: :desc)
   end
 end

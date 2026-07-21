@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  get "search/index"
   get "explore/index"
+  get "/search", to: "search#index", as: :search
   devise_for :users
 
   resources :posts do
