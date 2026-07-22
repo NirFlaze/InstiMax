@@ -148,7 +148,7 @@
 
               <div class="comment-actions">
 
-                <%= button_to "Delete",
+                <%= button_to "Удалить",
                       post_comment_path(post, comment),
                       method: :delete,
                       class: "btn btn-danger btn-comment-delete" %>
@@ -212,13 +212,13 @@
     <div class="post-owner-actions">
 
 
-      <%= link_to "Edit",
+      <%= link_to "Изменить",
             edit_post_path(post),
             class: "btn btn-secondary",
             data: { turbo: false } %>
 
 
-      <%= link_to "Delete",
+      <%= link_to "Удалить",
             post_path(post),
             class: "btn btn-danger",
             data: {
