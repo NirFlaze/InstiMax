@@ -13,11 +13,11 @@
                     <% if user.avatar.attached? %>
 
                         <%= image_tag user.avatar, class: "following-avatar" %>
-
+                        
                     <% else %>
 
                         <div class="following-avatar-placeholder">
-                            👤
+                            <%= user.username.first.upcase %>
                         </div>
 
                     <% end %>

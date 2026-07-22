@@ -12,11 +12,11 @@
                         <%= link_to user_path(user), data: { turbo_frame: "_top" } do %>
                             <%= image_tag user.avatar, class: "search-avatar" %>
                         <% end %>
-
+                        
                     <% else %>
 
                         <div class="search-avatar-placeholder">
-                            👤
+                            <%= user.username.first.upcase %>
                         </div>
 
                     <% end %>
