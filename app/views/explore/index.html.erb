@@ -1,15 +1,32 @@
-<h1>Все публикации</h1>
+<div class="explore-page">
 
-<% if @posts.any? %>
+    <div class="explore-header">
+        <h1>Все публикации</h1>
+        <p>Публикации пользователей InstiMax</p>
+    </div>
 
-  <% @posts.each do |post| %>
+    <% if @posts.any? %>
 
-    <%= render "posts/post", post: post %>
+        <div class="explore-grid">
 
-  <% end %>
+            <% @posts.each do |post| %>
 
-<% else %>
+                <%= render "posts/post", post: post %>
 
-  <p>Публикаций пока нет.</p>
+            <% end %>
 
-<% end %>
+        </div>
+
+    <% else %>
+
+        <div class="explore-empty">
+
+            <h2>Пока нет публикаций</h2>
+
+            <p>Как только пользователи начнут публиковать фотографии, они появятся здесь.</p>
+
+        </div>
+
+    <% end %>
+
+</div>
