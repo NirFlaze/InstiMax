@@ -46,65 +46,7 @@
 
             <% @posts.each do |post| %>
 
-                <div class="feed-post">
-
-                    <div class="post-header">
-
-                        <div class="post-author">
-
-                            <% if post.user.avatar.attached? %>
-
-                                <%= image_tag post.user.avatar, class: "post-avatar" %>
-
-                            <% else %>
-
-                                <div class="post-avatar-placeholder">
-                                    👤
-                                </div>
-
-                            <% end %>
-
-                            <div>
-
-                                <%= link_to post.user.username,
-                                            user_path(post.user),
-                                            class: "post-username" %>
-
-                                <div class="post-date">
-                                    <%= post.created_at.strftime("%d.%m.%Y") %>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <% if post.image.attached? %>
-
-                        <%= image_tag post.image, class: "feed-image" %>
-
-                    <% end %>
-
-                    <% if post.caption.present? %>
-
-                        <div class="post-caption">
-                            <%= post.caption %>
-                        </div>
-
-                    <% end %>
-
-                    <div class="post-footer">
-
-                        ❤️ <%= post.likes.count %>
-
-                        <span>
-                            💬 <%= post.comments.count %>
-                        </span>
-
-                    </div>
-
-                </div>
+                 <%= render "posts/post", post: post %>
 
             <% end %>
 
