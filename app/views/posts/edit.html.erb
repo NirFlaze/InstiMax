@@ -1,16 +1,50 @@
-<h1>Редактирование публикации</h1>
+<div class="post-form-container">
 
-<%= form_with model: @post do |form| %>
+    <div class="post-form-card">
 
-  <div>
-    <%= form.label :caption, "Описание" %><br>
-    <%= form.text_area :caption %>
-  </div>
+        <h1>Редактировать публикацию</h1>
 
-  <br>
+        <p class="post-form-subtitle">
+            Измените описание своей публикации.
+        </p>
 
-  <div>
-    <%= form.submit "Сохранить изменения" %>
-  </div>
+        <%= form_with model: @post do |form| %>
 
-<% end %>
+            <% if @post.image.attached? %>
+
+                <div class="current-image">
+
+                    <%= image_tag @post.image,
+                        class: "current-post-image" %>
+
+                </div>
+
+            <% end %>
+
+            <div class="form-group">
+
+                <%= form.label :caption, "Описание" %>
+
+                <%= form.text_area :caption,
+                        rows: 6,
+                        class: "post-textarea",
+                        placeholder: "Напишите описание..." %>
+
+            </div>
+
+            <div class="form-actions">
+
+                <%= form.submit "Сохранить изменения",
+                        class: "btn btn-primary" %>
+
+                <%= link_to "Отмена",
+                        posts_path,
+                        class: "btn btn-secondary" %>
+
+            </div>
+
+        <% end %>
+
+    </div>
+
+</div>

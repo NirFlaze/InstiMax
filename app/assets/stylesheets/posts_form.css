@@ -1,0 +1,70 @@
+.post-form-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.post-form-card {
+    width: 100%;
+    max-width: 720px;
+    background: var(--card);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow);
+    padding: 36px;
+}
+
+.post-form-card h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.post-form-subtitle {
+    color: var(--text-light);
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.current-image {
+    margin-bottom: 28px;
+}
+
+.current-post-image {
+    width: 100%;
+    max-height: 520px;
+    object-fit: contain;
+    border-radius: var(--radius-image);
+    display: block;
+    background: #F3F4F6;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 15px;
+}
+
+.post-textarea {
+    min-height: 180px;
+    resize: vertical;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+.form-actions .btn {
+    min-width: 180px;
+}
