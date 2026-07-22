@@ -1,34 +1,61 @@
 <%= turbo_frame_tag "post_#{post.id}" do %>
-<div style="
-  border:1px solid #ddd;
-  border-radius:14px;
-  padding:18px;
-  margin-bottom:25px;
-  background:white;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
-  max-width:600px;">
 
-  <h3 style="margin-top:0;">
-    <%= post.user.username %>
-  </h3>
+<div class="post-card">
+
+<div class="post-header">
+
+  <div class="post-user">
+
+    <div class="post-avatar">
+      <% if post.user.avatar.attached? %>
+        <%= image_tag post.user.avatar, class: "avatar-image" %>
+      <% else %>
+        <div class="avatar-placeholder">
+          <%= post.user.username.first.upcase %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="post-user-info">
+
+      <div class="post-author">
+        <%= post.user.username %>
+      </div>
+
+      <div class="post-date">
+        <%= post.created_at.strftime("%d %b %Y") %>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
 
   <% if post.image.attached? %>
-    <%= image_tag post.image,
-          width: 550,
-          style: "border-radius:10px;max-width:100%;height:auto;" %>
+
+    <div class="post-image-wrapper">
+
+      <%= image_tag post.image,
+            class: "post-image" %>
+
+    </div>
+
   <% end %>
 
-  <p style="font-size:16px;">
+
+  <div class="post-content">
+
+  <p class="post-caption">
     <%= post.caption %>
   </p>
 
+</div>
 
-  <div style="
-    display:flex;
-    align-items:center;
-    gap:25px;
-    margin-top:12px;
-    margin-bottom:12px;">
+
+  <div class="post-stats">
+
 
     <% if user_signed_in? %>
 
@@ -37,142 +64,178 @@
         <%= button_to post_like_path(post),
               method: :delete,
               form: { data: { turbo_frame: dom_id(post) } },
-              style: "border:none;background:none;padding:0;cursor:pointer;" do %>
+              class: "like-button" do %>
 
-          <span style="font-size:28px;color:#e53935;">
+          <span class="liked-heart">
             ♥
           </span>
 
         <% end %>
+
 
       <% else %>
 
         <%= button_to post_like_path(post),
               method: :post,
               form: { data: { turbo_frame: dom_id(post) } },
-              style: "border:none;background:none;padding:0;cursor:pointer;" do %>
+              class: "like-button" do %>
 
-          <span style="font-size:28px;color:#777;">
+          <span class="unliked-heart">
             ♡
           </span>
 
         <% end %>
 
+
       <% end %>
+
 
     <% else %>
 
-      <span style="font-size:28px;color:#777;">
+      <span class="unliked-heart">
         ♡
       </span>
 
     <% end %>
 
-    <span>
+
+    <span class="likes-count">
       <%= post.likes.count %>
     </span>
 
-    <span style="color:#666;">
-      💬 <%= post.comments.count %>
+
+    <span class="comments-count">
+      <%= post.comments.count %>
     </span>
+
 
   </div>
 
 
-  <details style="text-align:left;">
+  <details class="comments-section">
 
-    <summary style="cursor:pointer;font-weight:bold;text-align:left;">
 
-      Показать комментарии
-
+    <summary class="comments-summary">
+      Комментарии (<%= post.comments.count %>)
     </summary>
 
-    <br>
 
-    <% if post.comments.any? %>
+    <div class="comments-list">
 
-      <% post.comments.each do |comment| %>
 
-        <div style="
-          background:#f5f5f5;
-          padding:10px;
-          border-radius:8px;
-          margin-bottom:10px;">
+      <% if post.comments.any? %>
 
-          <b><%= comment.user.username %></b>
 
-          <br>
+        <% post.comments.each do |comment| %>
 
-          <%= comment.content %>
 
-          <% if user_signed_in? && comment.user == current_user %>
+          <div class="comment-card">
 
-            <div style="margin-top:8px;">
 
-              <%= button_to "🗑 Удалить",
-                    post_comment_path(post, comment),
-                    method: :delete %>
+            <div class="comment-header">
+
+              <span class="comment-author">
+                <%= comment.user.username %>
+              </span>
 
             </div>
 
-          <% end %>
 
-        </div>
+            <div class="comment-content">
+              <%= comment.content %>
+            </div>
+
+
+            <% if user_signed_in? && comment.user == current_user %>
+
+              <div class="comment-actions">
+
+                <%= button_to "Delete",
+                      post_comment_path(post, comment),
+                      method: :delete,
+                      class: "btn btn-danger btn-comment-delete" %>
+
+              </div>
+
+            <% end %>
+
+
+          </div>
+
+
+        <% end %>
+
+
+      <% else %>
+
+
+        <p class="no-comments">
+          Комментариев пока нет.
+        </p>
+
 
       <% end %>
 
-    <% else %>
-
-      <p>Комментариев пока нет.</p>
-
-    <% end %>
 
 
-    <% if user_signed_in? %>
+      <% if user_signed_in? %>
 
-      <%= form_with model: [post, Comment.new],
-            style:"display:flex;gap:10px;margin-top:10px;text-align:left;" do |f| %>
 
-        <%= f.text_field :content,
-              placeholder:"Напишите комментарий...",
-              style:"flex:1;padding:10px;border-radius:20px;" %>
+        <%= form_with model: [post, Comment.new],
+              class: "comment-form" do |f| %>
 
-        <%= f.submit "➤",
-              style:"
-              width:42px;
-              height:42px;
-              border:none;
-              border-radius:50%;
-              background:#0d6efd;
-              color:white;
-              cursor:pointer;" %>
+
+          <%= f.text_area :content,
+              placeholder: "Напишите комментарий...",
+              class: "comment-input",
+              rows: 2 %>
+
+
+          <%= f.submit "➤",
+                class: "comment-submit btn btn-primary" %>
+
+
+        <% end %>
+
 
       <% end %>
 
-    <% end %>
+
+    </div>
+
 
   </details>
 
 
+
   <% if user_signed_in? && current_user == post.user %>
 
-    <div style="margin-top:18px;">
 
-      <%= link_to "✏️ Редактировать",
+    <div class="post-owner-actions">
+
+
+      <%= link_to "Edit",
             edit_post_path(post),
+            class: "btn btn-secondary",
             data: { turbo: false } %>
-      |
 
-      <%= link_to "🗑 Удалить",
+
+      <%= link_to "Delete",
             post_path(post),
+            class: "btn btn-danger",
             data: {
               turbo_method: :delete,
               turbo_confirm: "Удалить публикацию?"
             } %>
 
+
     </div>
+
 
   <% end %>
 
+
 </div>
+
+
 <% end %>

@@ -15,6 +15,7 @@
 @import url("profile.css");
 @import url("edit_profile.css");
 @import url("navbar.css");
+@import url("posts.css");
 
 button, input[type="submit"] {
     cursor: pointer;
