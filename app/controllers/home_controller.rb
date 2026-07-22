@@ -11,7 +11,7 @@ class HomeController < ApplicationController
     end
 
     @posts = Post.where(
-      user_id: current_user.following.ids + [current_user.id]
+      user_id: current_user.following.ids + [ current_user.id ]
       ).order(created_at: :desc)
   end
 end
