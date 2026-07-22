@@ -47,10 +47,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #E5E7EB;
+    background: var(--primary);
+    color: white;
     width: 42px;
     height: 42px;
     border-radius: 50%;
+    font-weight: 700;
+    font-size: 18px;
 }
 
 .feed {

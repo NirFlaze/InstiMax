@@ -7,9 +7,13 @@
             <% if @user.avatar.attached? %>
 
                 <%= image_tag @user.avatar, class: "profile-avatar" %>
-
+                
             <% else %>
-                👤
+
+                <div class="profile-avatar-placeholder">
+                    <%= @user.username.first.upcase %>
+                </div>
+
             <% end %>
 
         </div>
