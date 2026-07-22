@@ -15,60 +15,70 @@
         </div>
 
         <div class="user-info">
-            <h2><%= @user.username %></h2>
 
-            <% if @user.gender.present? %>
+            <div class="profile-top">
 
-                <p><%= @user.gender == "male" ? "Мужской" : "Женский" %></p>
+                <h2><%= @user.username %></h2>
 
-            <% end %>
+                <% if @user.gender.present? %>
+
+                    <span class="profile-gender">
+                        <%= @user.gender == "male" ? "Мужской" : "Женский" %>
+                    </span>
+
+                <% end %>
+
+            </div>
 
             <div class="profile-stats">
 
                 <div>
-                    <strong><%= @user.posts.count %></strong><br>
-                    Постов
+                    <strong><%= @user.posts.count %></strong>
+                    <span>Постов</span>
                 </div>
 
                 <div>
-                    <strong><%= @user.followers.count %></strong><br>
-                    Подписчиков
+                    <strong><%= @user.followers.count %></strong>
+                    <span>Подписчиков</span>
                 </div>
 
                 <div>
-                    <strong><%= @user.following.count %></strong><br>
-                    Подписок
+                    <strong><%= @user.following.count %></strong>
+                    <span>Подписок</span>
                 </div>
 
             </div>
 
             <% if @user.bio.present? %>
 
-                <div class="bio">
-                <p><%= @user.bio %></p>
-                </div>
+                <div class="bio"><%= @user.bio %></div>
 
             <% end %>
 
-            <% unless current_user == @user %>
 
-                <% if current_user.following?(@user) %>
+            <div class="buttons">
+            
+                <% unless current_user == @user %>
 
-                    <%= button_to "Отписаться",
-                                follow_path(following_id: @user.id),
-                                method: :delete,
-                                class: "unfollow-button" %>
+                    <% if current_user.following?(@user) %>
 
-                <% else %>
+                        <%= button_to "Отписаться",
+                                    follow_path(following_id: @user.id),
+                                    method: :delete,
+                                    class: "unfollow-button" %>
 
-                    <%= button_to "Подписаться",
-                                follow_path(following_id: @user.id),
-                                method: :post,
-                                class: "follow-button" %>
+                    <% else %>
+
+                        <%= button_to "Подписаться",
+                                    follow_path(following_id: @user.id),
+                                    method: :post,
+                                    class: "follow-button" %>
+
+                    <% end %>
 
                 <% end %>
 
-            <% end %>
+            </div>
 
         </div>
 
@@ -84,15 +94,21 @@
 
     <% if @posts.any? %>
 
-        <% @posts.each do |post| %>
+        <div class="profile-posts-grid">
 
-           <%= render "posts/post", post: post %>
+            <% @posts.each do |post| %>
 
-        <% end %> 
+                <%= render "posts/post", post: post %>
+
+            <% end %>
+
+        </div>
 
     <% else %>
 
-        <p class="no-posts">У вас пока нет публикаций.</p>
+        <p class="no-posts">
+            Здесь пока нет публикаций.
+        </p>
 
     <% end %>
 

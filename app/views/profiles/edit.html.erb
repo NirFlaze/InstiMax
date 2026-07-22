@@ -15,6 +15,12 @@
                 <%= image_tag @user.avatar,
                               class: "avatar-preview" %>
 
+            <% else %>
+
+                <div class="avatar-placeholder">
+                    👤
+                </div>
+
             <% end %>
 
             <%= f.file_field :avatar %>

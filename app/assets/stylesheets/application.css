@@ -9,7 +9,7 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-@import url("layot.css");
+@import url("layout.css");
 @import url("home.css");
 @import url("devise.css");
 @import url("profile.css");
