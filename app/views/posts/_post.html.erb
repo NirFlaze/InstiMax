@@ -16,6 +16,7 @@
       <% end %>
     </div>
 
+
     <div class="post-user-info">
 
       <div class="post-author">
@@ -29,6 +30,30 @@
     </div>
 
   </div>
+
+<% if user_signed_in? && current_user == post.user %>
+
+    <div class="post-owner-actions">
+
+
+      <%= link_to "Изменить",
+            edit_post_path(post),
+            class: "btn btn-secondary",
+            data: { turbo: false } %>
+
+
+      <%= link_to "Удалить",
+            post_path(post),
+            class: "btn btn-danger",
+            data: {
+              turbo_method: :delete,
+              turbo_confirm: "Удалить публикацию?"
+            } %>
+
+
+    </div>
+
+<% end %>
 
 </div>
 
@@ -103,7 +128,7 @@
 
 
     <span class="comments-count">
-      <%= post.comments.count %>
+      💬 <%= post.comments.count %>
     </span>
 
 
@@ -205,32 +230,6 @@
   </details>
 
 
-
-  <% if user_signed_in? && current_user == post.user %>
-
-
-    <div class="post-owner-actions">
-
-
-      <%= link_to "Изменить",
-            edit_post_path(post),
-            class: "btn btn-secondary",
-            data: { turbo: false } %>
-
-
-      <%= link_to "Удалить",
-            post_path(post),
-            class: "btn btn-danger",
-            data: {
-              turbo_method: :delete,
-              turbo_confirm: "Удалить публикацию?"
-            } %>
-
-
-    </div>
-
-
-  <% end %>
 
 
 </div>
