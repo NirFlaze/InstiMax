@@ -48,8 +48,8 @@
 
 .post-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 16px;
 }
 
@@ -167,18 +167,19 @@
 }
 
 .comment-content {
-    margin-top: 8px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .no-comments {
     text-align: center;
     color: var(--text-light);
 }
+
 .comment-form {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 18px;
+    display:flex;
+    align-items:flex-end;
+    gap:12px;
 }
 
 .comment-input {
@@ -201,10 +202,17 @@
 
 .post-owner-actions {
     display: flex;
-    gap: 12px;
-    margin-top: 20px;
-    padding-top: 18px;
-    border-top: 1px solid var(--border);
+    gap: 10px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.post-owner-actions .btn {
+    height: 34px;
+    padding: 0 14px;
+    font-size: 13px;
 }
 
 .post-avatar {
@@ -245,3 +253,17 @@
 
     overflow: hidden;
 }
+
+.btn-comment-delete {
+
+    padding: 6px 12px !important;
+
+    height: 26px !important;
+
+    font-size: 13px;
+
+    border-radius: 8px;
+
+}
+
+
