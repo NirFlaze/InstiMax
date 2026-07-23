@@ -32,7 +32,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.find(params[:id])
 
     if @post.update(post_params)
-      redirect_to posts_path, notice: "Публикация успешно обновлена!"
+      redirect_to profile_path, notice: "Публикация успешно обновлена!"
     else
       render :edit, status: :unprocessable_entity
     end
